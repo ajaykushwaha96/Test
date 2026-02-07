@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+              url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee') center/cover no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container {
+  background: rgba(0,0,0,0.55);
+  padding: 50px;
+  border-radius: 25px;
+  max-width: 900px;
+  width: 90%;
+  min-height: 450px;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.5rem;
+  color: #ffb3c1;
+}
+
+.quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 25px 0;
+  line-height: 1.8;
+}
+
+h2 {
+  margin: 40px 0 30px;
+}
+
+#buttonBlock {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+  left: 35%;
+  top: 70px;
+}
+
+#no {
+  background: #666;
+  color: #ddd;
+  left: 55%;
+  top: 70px;
+}
+
+.message, .soft-note, #yesWarning {
+  display: none;
+  margin-top: 35px;
+  font-size: 2rem;
+  font-family: 'Great Vibes', cursive;
+  color: #ffd6e0;
+  text-align: center;
+}
+
+#yesWarning {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  padding: 20px 30px;
+  border-radius: 20px;
+  z-index: 10;
+}
+
+.soft-note {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #ffe6ec;
+}
