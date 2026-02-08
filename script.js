@@ -7,6 +7,7 @@ const yesHoverMessage = document.getElementById("yesHoverMessage");
 
 let noDodging = true;      // NO button dodges for 40 seconds
 let yesMoving = true;      // YES moves on hover for 20 seconds
+let yesMessageShown = false; // YES hover message stays after first hover
 
 /* Move button inside container */
 function moveButton(btn) {
@@ -19,12 +20,13 @@ function moveButton(btn) {
 
 /* YES button hover */
 yesBtn.addEventListener("mouseover", () => {
-  if (yesMoving) moveButton(yesBtn); // only move for first 20s
-  yesHoverMessage.style.display = "block"; // show hover message
-});
+  if (yesMoving) moveButton(yesBtn); // move only if YES is still moving
 
-yesBtn.addEventListener("mouseout", () => {
-  yesHoverMessage.style.display = "none"; // hide message
+  // Show hover message on first hover
+  if (!yesMessageShown) {
+    yesHoverMessage.style.display = "block";
+    yesMessageShown = true;
+  }
 });
 
 /* NO button hover */
