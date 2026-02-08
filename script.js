@@ -1,56 +1,74 @@
 const buttonBlock = document.getElementById("buttonBlock");
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
-const yesWarning = document.getElementById("yesWarning");
 const yesMessage = document.getElementById("yesMessage");
 const noMessage = document.getElementById("noMessage");
+const yesHoverMessage = document.getElementById("yesHoverMessage");
 
-let yesUnlocked = false;
-let noUnlocked = false;
+let noDodging = true;      // NO button dodges for 40 seconds
+let yesMoving = true;      // YES moves on hover for 20 seconds
 
-// Function to randomly move button inside block
+/* Move button inside container */
 function moveButton(btn) {
   const maxX = buttonBlock.clientWidth - btn.offsetWidth;
   const maxY = buttonBlock.clientHeight - btn.offsetHeight;
+
   btn.style.left = Math.random() * maxX + "px";
   btn.style.top = Math.random() * maxY + "px";
 }
 
-// Hover on YES shows warning before unlock
+/* YES button hover */
 yesBtn.addEventListener("mouseover", () => {
-  if (!yesUnlocked) {
-    moveButton(yesBtn);
-    yesWarning.style.display = "block";
+  if (yesMoving) moveButton(yesBtn); // only move for first 20s
+  yesHoverMessage.style.display = "block"; // show hover message
+});
+
+yesBtn.addEventListener("mouseout", () => {
+  yesHoverMessage.style.display = "none"; // hide message
+});
+
+/* NO button hover */
+noBtn.addEventListener("mouseover", () => {
+  if (noDodging) {
+    moveButton(noBtn);
   }
 });
 
-// Unlock YES after 30 seconds
-setTimeout(() => { 
-  yesUnlocked = true; 
-  yesWarning.style.display = "none"; 
-}, 30000);
-
-// Unlock NO after 90 seconds
-setTimeout(() => { 
-  noUnlocked = true; 
-}, 90000);
-
-// Click YES after unlock
+/* YES click */
 yesBtn.addEventListener("click", () => {
-  if (!yesUnlocked) return;
   buttonBlock.style.display = "none";
-  yesWarning.style.display = "none";
   yesMessage.style.display = "block";
 });
 
-// Hover NO moves before unlock
-noBtn.addEventListener("mouseover", () => {
-  if (!noUnlocked) moveButton(noBtn);
-});
-
-// Click NO after unlock
+/* NO click */
 noBtn.addEventListener("click", () => {
-  if (!noUnlocked) return;
   buttonBlock.style.display = "none";
   noMessage.style.display = "block";
 });
+
+/* Stop NO dodging after 40 seconds */
+setTimeout(() => {
+  noDodging = false;
+}, 40000);
+
+/* Stop YES moving after 20 seconds */
+setTimeout(() => {
+  yesMoving = false;
+}, 20000);
+
+/* Floating hearts */
+const heartsContainer = document.querySelector(".hearts");
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = 16 + Math.random() * 30 + "px";
+  heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+
+  heartsContainer.appendChild(heart);
+  setTimeout(() => heart.remove(), 10000);
+}
+
+setInterval(createHeart, 400);
